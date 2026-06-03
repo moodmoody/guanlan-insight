@@ -1,0 +1,55 @@
+.page-title {
+  margin-top: 18rpx;
+  font-size: 42rpx;
+  font-weight: 800;
+  color: #111827;
+}
+
+.page-subtitle {
+  margin-top: 12rpx;
+  color: #667085;
+  font-size: 27rpx;
+  line-height: 1.6;
+}
+
+.empty-card {
+  margin-top: 38rpx;
+  padding: 36rpx;
+  border: 1rpx solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.empty-title {
+  color: #182230;
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.empty-desc {
+  margin: 12rpx 0 28rpx;
+  color: #667085;
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.report-item {
+  margin-top: 20rpx;
+  padding: 28rpx;
+  border: 1rpx solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.report-item-title {
+  color: #182230;
+  font-size: 29rpx;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.report-item-meta {
+  margin-top: 12rpx;
+  color: #667085;
+  font-size: 24rpx;
+}

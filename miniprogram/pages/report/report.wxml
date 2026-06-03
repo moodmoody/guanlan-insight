@@ -1,0 +1,74 @@
+<view class="page" wx:if="{{report}}">
+  <view class="report-header">
+    <view class="report-topline">
+      <view class="report-type">{{report.analysisLabel}}</view>
+      <view class="report-status">已生成</view>
+    </view>
+    <view class="report-title">{{report.query}}</view>
+    <view class="report-meta">基于公开信息与用户提供材料生成，仅作为多视角判断参考</view>
+  </view>
+
+  <view class="metric-grid">
+    <view class="metric-card">
+      <view class="metric-label">可信度</view>
+      <view class="metric-value">{{report.credibility.level}}</view>
+    </view>
+    <view class="metric-card">
+      <view class="metric-label">风险等级</view>
+      <view class="metric-value risk">{{report.riskLevel}}</view>
+    </view>
+    <view class="metric-card">
+      <view class="metric-label">时间范围</view>
+      <view class="metric-value">{{report.timeRange}}</view>
+    </view>
+  </view>
+
+  <view class="credibility-card">
+    <view class="credibility-head">
+      <view>
+        <view class="credibility-title">信息可信度评估</view>
+        <view class="credibility-subtitle">当前为阶段性判断，建议结合权威信源持续核验。</view>
+      </view>
+      <view class="score">{{report.credibilityScore}}</view>
+    </view>
+    <view class="score-track">
+      <view class="score-fill" style="width: {{report.credibilityScore}}%;"></view>
+    </view>
+  </view>
+
+  <view class="action-row">
+    <view class="action-button" bindtap="favoriteReport">收藏</view>
+    <button class="action-button share-button" open-type="share">分享</button>
+    <view class="action-button" bindtap="reanalyze">重新分析</view>
+  </view>
+
+  <view wx:for="{{report.sections}}" wx:key="key" class="section-card">
+    <view class="section-heading">
+      <view class="section-index">{{item.displayIndex}}</view>
+      <view class="section-title">{{item.title}}</view>
+    </view>
+    <view wx:if="{{item.body}}" class="section-body">{{item.body}}</view>
+    <view wx:if="{{item.items}}" class="item-list">
+      <view wx:for="{{item.items}}" wx:key="*this" wx:for-item="point" class="bullet-row">
+        <view class="bullet"></view>
+        <view class="bullet-text">{{point}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="feedback card section">
+    <view class="feedback-title">这份报告有帮助吗？</view>
+    <view class="feedback-desc">你的反馈会帮助我们优化观点聚类、可信度评估和趋势研判。</view>
+    <view class="feedback-actions">
+      <view class="feedback-button" data-value="useful" bindtap="submitFeedback">有帮助</view>
+      <view class="feedback-button" data-value="inaccurate" bindtap="submitFeedback">不准确</view>
+      <view class="feedback-button" data-value="missing" bindtap="submitFeedback">遗漏重点</view>
+    </view>
+  </view>
+</view>
+<view class="page" wx:else>
+  <view class="card">
+    <view class="loading-title">正在加载报告</view>
+    <view class="muted">请稍候，观澜智析正在读取分析结果。</view>
+  </view>
+</view>

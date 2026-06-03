@@ -1,0 +1,58 @@
+.page-title {
+  margin-top: 18rpx;
+  font-size: 42rpx;
+  font-weight: 800;
+  color: #111827;
+}
+
+.page-subtitle {
+  margin-top: 12rpx;
+  color: #667085;
+  font-size: 27rpx;
+  line-height: 1.6;
+}
+
+.field {
+  margin-bottom: 30rpx;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  margin-bottom: 12rpx;
+  color: #667085;
+  font-size: 24rpx;
+}
+
+.value {
+  color: #182230;
+  font-size: 30rpx;
+  line-height: 1.6;
+}
+
+.strong {
+  color: #0f766e;
+  font-weight: 700;
+}
+
+.chip-row {
+  display: flex;
+  gap: 12rpx;
+}
+
+.range-chip {
+  min-height: 62rpx;
+  padding: 14rpx 20rpx;
+  border: 1rpx solid #d0d5dd;
+  border-radius: 8px;
+  color: #344054;
+  font-size: 25rpx;
+}
+
+.range-chip.active {
+  border-color: #0f766e;
+  background: #e6f4f1;
+  color: #0f766e;
+}

@@ -1,0 +1,32 @@
+<view class="page">
+  <view class="profile-card">
+    <view class="avatar">观</view>
+    <view>
+      <view class="profile-name">微信用户</view>
+      <view class="profile-desc">今日剩余免费分析 3 次</view>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="menu-row">
+      <text>收藏报告</text>
+      <text class="muted">0</text>
+    </view>
+    <view class="menu-row">
+      <text>意见反馈</text>
+      <text class="muted">去提交</text>
+    </view>
+    <view class="menu-row">
+      <text>用户协议</text>
+      <text class="muted">查看</text>
+    </view>
+    <view class="menu-row">
+      <text>隐私政策</text>
+      <text class="muted">查看</text>
+    </view>
+  </view>
+
+  <view class="section disclaimer">
+    观澜智析基于公开信息与用户提供材料生成分析结果，仅作为多视角理解与判断参考。
+  </view>
+</view>

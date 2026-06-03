@@ -1,0 +1,20 @@
+<view class="page progress-page">
+  <view class="status-card">
+    <view class="status-label">多智能体分析中</view>
+    <view class="status-title">{{task.query}}</view>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%;"></view>
+    </view>
+    <view class="progress-text">{{progress}}%</view>
+  </view>
+
+  <view class="section">
+    <view wx:for="{{agents}}" wx:key="name" class="agent-row">
+      <view class="agent-dot {{item.done ? 'done' : ''}}"></view>
+      <view>
+        <view class="agent-name">{{item.name}}</view>
+        <view class="agent-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+</view>

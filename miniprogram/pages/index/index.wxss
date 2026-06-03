@@ -1,0 +1,147 @@
+.index-page {
+  padding-bottom: 56rpx;
+  background: linear-gradient(180deg, #eef7f6 0%, #f6f8fb 34%, #f6f8fb 100%);
+}
+
+.hero {
+  padding: 18rpx 0 26rpx;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 8px;
+  background: #111827;
+  color: #2dd4bf;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.brand-name {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #111827;
+}
+
+.brand-subtitle {
+  margin-top: 4rpx;
+  font-size: 24rpx;
+  color: #667085;
+}
+
+.headline {
+  margin-top: 38rpx;
+  font-size: 50rpx;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #111827;
+}
+
+.description {
+  margin-top: 16rpx;
+  color: #475467;
+  font-size: 27rpx;
+  line-height: 1.65;
+}
+
+.query-panel {
+  padding: 24rpx;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1rpx solid #d9e2ec;
+  box-shadow: 0 14rpx 36rpx rgba(15, 23, 42, 0.08);
+}
+
+.query-input {
+  width: 100%;
+  min-height: 170rpx;
+  padding: 22rpx;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #182230;
+  font-size: 29rpx;
+  line-height: 1.6;
+}
+
+.query-panel .primary-button {
+  margin-top: 20rpx;
+}
+
+.action-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92rpx;
+  line-height: 1;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12rpx;
+  margin-top: 18rpx;
+}
+
+.action-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 76rpx;
+  min-height: 76rpx;
+  font-size: 23rpx;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.section-title {
+  margin-bottom: 16rpx;
+  color: #182230;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.example-item {
+  margin-bottom: 16rpx;
+  padding: 22rpx 24rpx;
+  border: 1rpx solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #344054;
+  font-size: 27rpx;
+  line-height: 1.5;
+}
+
+.quota-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #344054;
+}
+
+.quota-count {
+  color: #0f766e;
+  font-weight: 700;
+}
+
+.tag-list {
+  margin-top: 22rpx;
+}
+
+.disclaimer {
+  margin-top: 12rpx;
+  color: #667085;
+  font-size: 23rpx;
+  line-height: 1.6;
+}

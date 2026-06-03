@@ -1,0 +1,9 @@
+{
+  "name": "guanlan-zhixi-miniprogram",
+  "version": "0.1.0",
+  "private": true,
+  "description": "观澜智析微信原生小程序",
+  "scripts": {
+    "test": "node --test"
+  }
+}

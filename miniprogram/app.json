@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/confirm/confirm",
+    "pages/progress/progress",
+    "pages/report/report",
+    "pages/history/history",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationBarTitleText": "观澜智析",
+    "navigationBarBackgroundColor": "#111827",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f6f8fb"
+  },
+  "tabBar": {
+    "color": "#667085",
+    "selectedColor": "#0f766e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "分析"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "历史"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

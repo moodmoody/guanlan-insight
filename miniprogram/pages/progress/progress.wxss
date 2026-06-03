@@ -1,0 +1,81 @@
+.progress-page {
+  padding-top: 40rpx;
+}
+
+.status-card {
+  padding: 34rpx;
+  border-radius: 8px;
+  background: #111827;
+  color: #ffffff;
+}
+
+.status-label {
+  color: #99f6e4;
+  font-size: 25rpx;
+}
+
+.status-title {
+  margin-top: 14rpx;
+  font-size: 34rpx;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.progress-bar {
+  height: 16rpx;
+  margin-top: 34rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999rpx;
+  background: #2dd4bf;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  margin-top: 14rpx;
+  text-align: right;
+  color: #d1fae5;
+  font-size: 24rpx;
+}
+
+.agent-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18rpx;
+  margin-bottom: 18rpx;
+  padding: 24rpx;
+  border: 1rpx solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.agent-dot {
+  width: 22rpx;
+  height: 22rpx;
+  margin-top: 10rpx;
+  border-radius: 50%;
+  border: 3rpx solid #d0d5dd;
+}
+
+.agent-dot.done {
+  border-color: #0f766e;
+  background: #0f766e;
+}
+
+.agent-name {
+  color: #182230;
+  font-size: 29rpx;
+  font-weight: 700;
+}
+
+.agent-desc {
+  margin-top: 6rpx;
+  color: #667085;
+  font-size: 24rpx;
+  line-height: 1.5;
+}

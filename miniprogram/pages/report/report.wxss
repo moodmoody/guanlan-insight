@@ -1,0 +1,266 @@
+.report-header {
+  padding: 34rpx;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #111827 0%, #164e63 100%);
+  color: #ffffff;
+}
+
+.report-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.report-type {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44rpx;
+  padding: 0 16rpx;
+  border-radius: 999rpx;
+  background: rgba(45, 212, 191, 0.14);
+  color: #99f6e4;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.report-status {
+  color: #d1fae5;
+  font-size: 23rpx;
+}
+
+.report-title {
+  margin-top: 22rpx;
+  font-size: 36rpx;
+  line-height: 1.45;
+  font-weight: 800;
+}
+
+.report-meta {
+  margin-top: 18rpx;
+  color: #d1d5db;
+  font-size: 24rpx;
+  line-height: 1.55;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14rpx;
+  margin-top: 20rpx;
+}
+
+.metric-card {
+  min-height: 124rpx;
+  padding: 18rpx 14rpx;
+  border: 1rpx solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.metric-label {
+  color: #667085;
+  font-size: 22rpx;
+}
+
+.metric-value {
+  margin-top: 14rpx;
+  color: #0f766e;
+  font-size: 28rpx;
+  font-weight: 800;
+}
+
+.metric-value.risk {
+  color: #b45309;
+}
+
+.credibility-card {
+  margin-top: 20rpx;
+  padding: 28rpx;
+  border: 1rpx solid #ccfbf1;
+  border-radius: 8px;
+  background: #f0fdfa;
+}
+
+.credibility-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.credibility-title {
+  color: #134e4a;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.credibility-subtitle {
+  margin-top: 8rpx;
+  color: #475467;
+  font-size: 24rpx;
+  line-height: 1.55;
+}
+
+.score {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 86rpx;
+  height: 86rpx;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #0f766e;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.score-track {
+  height: 14rpx;
+  margin-top: 22rpx;
+  border-radius: 999rpx;
+  background: #ccfbf1;
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: 999rpx;
+  background: linear-gradient(90deg, #14b8a6, #0f766e);
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14rpx;
+  margin-top: 22rpx;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 76rpx;
+  border: 1rpx solid #d0d5dd;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #344054;
+  font-size: 24rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.share-button {
+  margin: 0;
+  padding: 0;
+}
+
+.section-card {
+  margin-top: 22rpx;
+  padding: 30rpx 28rpx;
+  border: 1rpx solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.section-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 8px;
+  background: #ecfeff;
+  color: #0e7490;
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.section-title {
+  flex: 1;
+  color: #182230;
+  font-size: 31rpx;
+  font-weight: 800;
+}
+
+.section-body {
+  margin-top: 16rpx;
+  color: #475467;
+  font-size: 27rpx;
+  line-height: 1.75;
+}
+
+.item-list {
+  margin-top: 14rpx;
+}
+
+.bullet-row {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 14rpx;
+  padding: 16rpx;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.bullet {
+  flex: 0 0 auto;
+  width: 12rpx;
+  height: 12rpx;
+  margin-top: 16rpx;
+  border-radius: 50%;
+  background: #0f766e;
+}
+
+.bullet-text {
+  flex: 1;
+  color: #475467;
+  font-size: 26rpx;
+  line-height: 1.65;
+}
+
+.feedback-title {
+  color: #182230;
+  font-size: 29rpx;
+  font-weight: 700;
+}
+
+.feedback-desc {
+  margin-top: 8rpx;
+  color: #667085;
+  font-size: 24rpx;
+  line-height: 1.55;
+}
+
+.feedback-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12rpx;
+  margin-top: 18rpx;
+}
+
+.feedback-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 72rpx;
+  border: 1rpx solid #d0d5dd;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #344054;
+  font-size: 23rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.loading-title {
+  margin-bottom: 12rpx;
+  color: #182230;
+  font-size: 30rpx;
+  font-weight: 800;
+}

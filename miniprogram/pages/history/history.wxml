@@ -1,0 +1,15 @@
+<view class="page">
+  <view class="page-title">历史报告</view>
+  <view class="page-subtitle">回看你的舆情分析、消息甄别和趋势预测记录。</view>
+
+  <view wx:if="{{reports.length === 0}}" class="empty-card">
+    <view class="empty-title">还没有报告</view>
+    <view class="empty-desc">从首页输入一个话题，生成第一份分析报告。</view>
+    <button class="primary-button" bindtap="goAnalyze">去分析</button>
+  </view>
+
+  <view wx:for="{{reports}}" wx:key="id" class="report-item" data-id="{{item.id}}" bindtap="openReport">
+    <view class="report-item-title">{{item.query}}</view>
+    <view class="report-item-meta">{{item.analysisLabel}} · 可信度 {{item.credibility.level}} · {{item.timeRange}}</view>
+  </view>
+</view>

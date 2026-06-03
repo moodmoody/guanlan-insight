@@ -1,0 +1,48 @@
+<view class="page index-page">
+  <view class="hero">
+    <view class="brand-row">
+      <view class="brand-mark">澜</view>
+      <view>
+        <view class="brand-name">观澜智析</view>
+        <view class="brand-subtitle">AI 多视角舆情分析助手</view>
+      </view>
+    </view>
+    <view class="headline">看见舆论全貌</view>
+    <view class="description">输入一个话题、事件、品牌、链接或网传消息，生成事件脉络、观点阵营、情绪变化、信息可信度与趋势参考。</view>
+  </view>
+
+  <view class="query-panel">
+    <textarea
+      class="query-input"
+      value="{{query}}"
+      maxlength="500"
+      auto-height
+      placeholder="输入你想分析的话题、事件、品牌、链接或网传消息"
+      bindinput="onInput"
+    />
+    <view class="primary-button action-submit" bindtap="startAnalysis">开始分析</view>
+    <view class="quick-actions">
+      <view class="secondary-button action-tile" bindtap="pasteLink">粘贴链接</view>
+      <view class="secondary-button action-tile" bindtap="pasteText">上传文本</view>
+      <view class="secondary-button action-tile" bindtap="goHistory">查看历史</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">试试这样问</view>
+    <view class="example-list">
+      <view wx:for="{{examples}}" wx:key="*this" class="example-item" data-value="{{item}}" bindtap="useExample">{{item}}</view>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="quota-row">
+      <text>今日剩余免费分析</text>
+      <text class="quota-count">{{quotaLeft}} 次</text>
+    </view>
+    <view class="tag-list">
+      <text wx:for="{{tags}}" wx:key="*this" class="tag">{{item}}</text>
+    </view>
+    <view class="disclaimer">分析结果基于公开信息与用户提供材料生成，仅作为多视角理解与判断参考。</view>
+  </view>
+</view>
