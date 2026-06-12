@@ -1,0 +1,29 @@
+<view class="page legal-page">
+  <view class="legal-title">AI 内容说明</view>
+  <view class="legal-updated">适用于观澜智析生成的分析报告</view>
+
+  <view class="legal-card highlight">
+    <view class="section-title">重要提示</view>
+    <view class="paragraph">AI 生成内容仅作为多视角理解和判断参考，不代表事实裁定，也不代表平台立场。</view>
+  </view>
+
+  <view class="legal-card">
+    <view class="section-title">一、关于信息可信度</view>
+    <view class="paragraph">“可信度评估”“消息甄别”“风险等级”等结果基于用户输入、公开来源和模型分析生成，仅用于提示证据强弱、信息疑点和后续核验方向。</view>
+  </view>
+
+  <view class="legal-card">
+    <view class="section-title">二、关于趋势预测</view>
+    <view class="paragraph">趋势判断属于基于现有材料的概率性分析，可能受到信息滞后、来源偏差、话题变化和模型能力限制影响，不保证准确或完整。</view>
+  </view>
+
+  <view class="legal-card">
+    <view class="section-title">三、关于来源引用</view>
+    <view class="paragraph">系统可能展示公开检索来源作为参考。来源内容、发布时间、完整性和权威性仍需用户自行核验，尤其是社交平台截图、二次转述和匿名爆料。</view>
+  </view>
+
+  <view class="legal-card">
+    <view class="section-title">四、使用建议</view>
+    <view class="paragraph">请将 AI 报告作为辅助材料，与官方通报、权威媒体、一手资料和专业意见交叉验证后再作判断或决策。</view>
+  </view>
+</view>

@@ -1,0 +1,42 @@
+.legal-page {
+  padding-bottom: 56rpx;
+}
+
+.legal-title {
+  margin-top: 18rpx;
+  color: #111827;
+  font-size: 44rpx;
+  font-weight: 800;
+}
+
+.legal-updated {
+  margin-top: 10rpx;
+  color: #667085;
+  font-size: 24rpx;
+}
+
+.legal-card {
+  margin-top: 24rpx;
+  padding: 28rpx;
+  border: 1rpx solid #e4e7ec;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.legal-card.highlight {
+  border-color: #ccfbf1;
+  background: #f0fdfa;
+}
+
+.section-title {
+  color: #182230;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.paragraph {
+  margin-top: 14rpx;
+  color: #475467;
+  font-size: 26rpx;
+  line-height: 1.75;
+}

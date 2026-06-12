@@ -16,12 +16,16 @@
       <text>意见反馈</text>
       <text class="muted">去提交</text>
     </view>
-    <view class="menu-row">
+    <view class="menu-row" data-type="agreement" bindtap="openLegal">
       <text>用户协议</text>
       <text class="muted">查看</text>
     </view>
-    <view class="menu-row">
+    <view class="menu-row" data-type="privacy" bindtap="openLegal">
       <text>隐私政策</text>
+      <text class="muted">查看</text>
+    </view>
+    <view class="menu-row" data-type="ai" bindtap="openLegal">
+      <text>AI 内容说明</text>
       <text class="muted">查看</text>
     </view>
   </view>

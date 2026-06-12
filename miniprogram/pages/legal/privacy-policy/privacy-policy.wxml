@@ -1,0 +1,29 @@
+<view class="page legal-page">
+  <view class="legal-title">隐私政策</view>
+  <view class="legal-updated">生效日期：2026年6月12日</view>
+
+  <view class="legal-card">
+    <view class="section-title">一、我们收集的信息</view>
+    <view class="paragraph">为提供分析服务，我们可能处理用户主动输入的分析需求、粘贴文本、链接、反馈内容、分析历史记录，以及微信小程序云开发提供的用户 openid 等基础标识信息。</view>
+  </view>
+
+  <view class="legal-card">
+    <view class="section-title">二、信息用途</view>
+    <view class="paragraph">上述信息用于创建分析任务、生成和保存报告、展示历史记录、统计免费次数、处理反馈、排查错误和改善服务质量。</view>
+  </view>
+
+  <view class="legal-card">
+    <view class="section-title">三、第三方服务</view>
+    <view class="paragraph">为生成分析结果，我们可能调用 AI 模型服务和公开信息检索服务。用户提交的分析需求及必要上下文可能会被发送至相关服务用于生成结果。</view>
+  </view>
+
+  <view class="legal-card">
+    <view class="section-title">四、用户注意事项</view>
+    <view class="paragraph">请勿在本服务中提交身份证号、手机号、住址、账号密码、聊天记录、商业秘密或其他敏感信息。若确需分析，请先自行脱敏处理。</view>
+  </view>
+
+  <view class="legal-card">
+    <view class="section-title">五、数据管理</view>
+    <view class="paragraph">用户可在小程序中查看历史报告。后续版本将继续完善删除、导出和反馈处理能力。如需处理个人信息相关请求，可通过小程序反馈入口联系我们。</view>
+  </view>
+</view>
