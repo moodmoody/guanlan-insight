@@ -5,6 +5,9 @@ Page({
   data: {
     task: null,
     progress: 12,
+    phase: 'preparing',
+    statusLabel: '多智能体分析中',
+    statusHint: '正在拆解问题、检索线索并规划分析任务',
     agents: [
       { name: '事实梳理', desc: '提炼事件主体、时间和关键细节', done: false },
       { name: '信源核验', desc: '检查来源一致性与疑点线索', done: false },
@@ -39,11 +42,17 @@ Page({
         ...agent,
         done: index < step
       }))
-      const progress = Math.min(100, 12 + step * 16)
+      const progress = Math.min(95, 12 + step * 14)
       this.setData({ agents, progress })
 
-      if (progress >= 100) {
+      if (step >= this.data.agents.length) {
         clearInterval(this.timer)
+        this.setData({
+          phase: 'processing',
+          statusLabel: 'AI 正在后台处理',
+          statusHint: '正在联网检索公开来源、提炼证据并生成结构化报告',
+          progress: 95
+        })
         this.runAnalysis()
       }
     }, 650)

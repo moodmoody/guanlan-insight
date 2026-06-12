@@ -21,6 +21,13 @@
   font-weight: 700;
 }
 
+.status-hint {
+  margin-top: 14rpx;
+  color: #d1d5db;
+  font-size: 24rpx;
+  line-height: 1.55;
+}
+
 .progress-bar {
   height: 16rpx;
   margin-top: 34rpx;
@@ -36,11 +43,25 @@
   transition: width 0.3s ease;
 }
 
-.progress-text {
+.progress-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 14rpx;
-  text-align: right;
+}
+
+.progress-text {
   color: #d1fae5;
   font-size: 24rpx;
+}
+
+.processing-badge {
+  min-height: 42rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(45, 212, 191, 0.16);
+  color: #99f6e4;
+  font-size: 22rpx;
 }
 
 .agent-row {
@@ -78,4 +99,53 @@
   color: #667085;
   font-size: 24rpx;
   line-height: 1.5;
+}
+
+.processing-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18rpx;
+  margin-top: 24rpx;
+  padding: 26rpx;
+  border: 1rpx solid #ccfbf1;
+  border-radius: 8px;
+  background: #f0fdfa;
+}
+
+.pulse-dot {
+  flex: 0 0 auto;
+  width: 22rpx;
+  height: 22rpx;
+  margin-top: 10rpx;
+  border-radius: 50%;
+  background: #0f766e;
+  animation: pulse 1.1s ease-in-out infinite;
+}
+
+.processing-title {
+  color: #134e4a;
+  font-size: 29rpx;
+  font-weight: 800;
+}
+
+.processing-desc {
+  margin-top: 8rpx;
+  color: #475467;
+  font-size: 24rpx;
+  line-height: 1.55;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.86);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.35;
+    transform: scale(0.86);
+  }
 }

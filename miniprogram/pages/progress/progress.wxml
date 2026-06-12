@@ -1,11 +1,15 @@
 <view class="page progress-page">
   <view class="status-card">
-    <view class="status-label">多智能体分析中</view>
+    <view class="status-label">{{statusLabel}}</view>
     <view class="status-title">{{task.query}}</view>
+    <view class="status-hint">{{statusHint}}</view>
     <view class="progress-bar">
       <view class="progress-fill" style="width: {{progress}}%;"></view>
     </view>
-    <view class="progress-text">{{progress}}%</view>
+    <view class="progress-footer">
+      <view class="progress-text">{{progress}}%</view>
+      <view wx:if="{{phase === 'processing'}}" class="processing-badge">请稍候</view>
+    </view>
   </view>
 
   <view class="section">
@@ -15,6 +19,14 @@
         <view class="agent-name">{{item.name}}</view>
         <view class="agent-desc">{{item.desc}}</view>
       </view>
+    </view>
+  </view>
+
+  <view wx:if="{{phase === 'processing'}}" class="processing-card">
+    <view class="pulse-dot"></view>
+    <view>
+      <view class="processing-title">报告正在生成</view>
+      <view class="processing-desc">真实 AI 分析通常需要 10-30 秒，页面会在完成后自动跳转。</view>
     </view>
   </view>
 </view>
