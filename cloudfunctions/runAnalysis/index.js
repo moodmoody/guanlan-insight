@@ -1,7 +1,7 @@
 const cloud = require('wx-server-sdk')
 const { buildReportDocument } = require('./reportTemplate')
 const { createAiReport, shouldUseAi } = require('./aiClient')
-const { searchSources, shouldUseBing } = require('./bingClient')
+const { searchSources, shouldUseTavily } = require('./tavilyClient')
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -21,20 +21,21 @@ exports.main = async (event) => {
   let report
   let sources = []
   let searchDebug = {
-    enabled: shouldUseBing(process.env),
-    provider: 'bing',
+    enabled: shouldUseTavily(process.env),
+    provider: 'tavily',
     resultCount: 0,
     attempts: []
   }
-  if (shouldUseBing(process.env)) {
+  if (shouldUseTavily(process.env)) {
     try {
       const searchResult = await searchSources({
-        query
+        query,
+        timeRange: event.timeRange
       })
       sources = searchResult.sources
       searchDebug = searchResult.debug
     } catch (error) {
-      console.error('Bing search failed, continuing without sources:', error)
+      console.error('Tavily search failed, continuing without sources:', error)
       searchDebug.error = error.message
     }
   }
