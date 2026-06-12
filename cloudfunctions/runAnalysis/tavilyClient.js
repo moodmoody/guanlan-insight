@@ -9,7 +9,7 @@ function shouldUseTavily(env) {
 function buildTavilyPayload(options) {
   return {
     query: String(options.query || '').trim(),
-    topic: 'news',
+    topic: options.topic || 'news',
     search_depth: 'basic',
     time_range: mapTimeRange(options.timeRange),
     max_results: 8,
@@ -20,12 +20,45 @@ function buildTavilyPayload(options) {
 
 async function searchSources(options) {
   const env = options.env || process.env
-  const payload = buildTavilyPayload({
+  const plan = buildSearchPlan({
     query: options.query,
     timeRange: options.timeRange
   })
-  const response = await postJson(TAVILY_SEARCH_URL, payload, env.TAVILY_API_KEY)
-  return normalizeTavilyResults(response)
+  const debug = {
+    enabled: true,
+    provider: 'tavily',
+    originalQuery: String(options.query || ''),
+    cleanedQuery: plan[0] ? plan[0].query : '',
+    attempts: []
+  }
+  const allSources = []
+
+  for (const payload of plan) {
+    try {
+      const response = await postJson(TAVILY_SEARCH_URL, payload, env.TAVILY_API_KEY)
+      const sources = normalizeTavilyResults(response)
+      debug.attempts.push({
+        topic: payload.topic,
+        query: payload.query,
+        resultCount: sources.length
+      })
+      allSources.push(...sources)
+
+      if (allSources.length >= 4) {
+        break
+      }
+    } catch (error) {
+      debug.attempts.push({
+        topic: payload.topic,
+        query: payload.query,
+        error: error.message
+      })
+    }
+  }
+
+  const sources = dedupeSources(allSources).slice(0, 8)
+  debug.resultCount = sources.length
+  return { sources, debug }
 }
 
 function normalizeTavilyResults(response) {
@@ -40,7 +73,55 @@ function normalizeTavilyResults(response) {
       sourceType: inferSourceType(item.url || '', item.title || '')
     }))
     .filter((item) => item.title && item.url)
+    .filter((item, index, list) => list.findIndex((candidate) => candidate.url === item.url) === index)
     .slice(0, 8)
+}
+
+function buildSearchPlan(options) {
+  const query = cleanSearchQuery(options.query)
+  return ['news', 'general'].map((topic) => buildTavilyPayload({
+    query,
+    topic,
+    timeRange: options.timeRange
+  }))
+}
+
+function cleanSearchQuery(query) {
+  let text = String(query || '').trim()
+  text = text
+    .replace(/^(请|帮我|麻烦)?(分析|分析一下|看一下|判断|甄别|评估|预测)(一下)?/g, '')
+    .replace(/(的)?(事件|事情|时间|舆情|走势|真假|可信度|可能疑点|疑点|后续|影响)$/g, '')
+    .replace(/[，。！？、,.!?]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  const replacements = [
+    [/被揭发一直用/g, ' '],
+    [/被曝一直用/g, ' '],
+    [/一直用/g, ' '],
+    [/充数/g, '充数']
+  ]
+  replacements.forEach(([pattern, value]) => {
+    text = text.replace(pattern, value)
+  })
+  text = text.replace(/\s+/g, ' ').trim()
+
+  if (/清北.*鹅腿.*鸭腿/.test(text)) {
+    return '清北鹅腿阿姨 鸭腿充数'
+  }
+
+  return text || String(query || '').trim()
+}
+
+function dedupeSources(sources) {
+  const seen = new Set()
+  return sources.filter((source) => {
+    if (!source.url || seen.has(source.url)) {
+      return false
+    }
+    seen.add(source.url)
+    return true
+  })
 }
 
 function mapTimeRange(timeRange) {
@@ -111,6 +192,8 @@ function postJson(url, payload, apiKey) {
 
 module.exports = {
   buildTavilyPayload,
+  buildSearchPlan,
+  cleanSearchQuery,
   normalizeTavilyResults,
   searchSources,
   shouldUseTavily

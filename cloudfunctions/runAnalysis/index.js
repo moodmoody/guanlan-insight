@@ -20,14 +20,23 @@ exports.main = async (event) => {
 
   let report
   let sources = []
+  let searchDebug = {
+    enabled: shouldUseTavily(process.env),
+    provider: 'tavily',
+    resultCount: 0,
+    attempts: []
+  }
   if (shouldUseTavily(process.env)) {
     try {
-      sources = await searchSources({
+      const searchResult = await searchSources({
         query,
         timeRange: event.timeRange
       })
+      sources = searchResult.sources
+      searchDebug = searchResult.debug
     } catch (error) {
       console.error('Tavily search failed, continuing without sources:', error)
+      searchDebug.error = error.message
     }
   }
 
@@ -53,6 +62,7 @@ exports.main = async (event) => {
     if (!report.sources) {
       report.sources = sources
     }
+    report.searchDebug = searchDebug
   } catch (error) {
     console.error('AI analysis failed, falling back to mock report:', error)
     report = buildReportDocument({
@@ -65,6 +75,7 @@ exports.main = async (event) => {
     })
     report.provider = 'mock_fallback'
     report.sources = sources
+    report.searchDebug = searchDebug
   }
 
   const addResult = await db.collection('reports').add({ data: report })

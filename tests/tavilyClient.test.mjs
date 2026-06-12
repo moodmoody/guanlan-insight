@@ -5,6 +5,8 @@ import { createRequire } from 'node:module'
 const require = createRequire(import.meta.url)
 const {
   buildTavilyPayload,
+  buildSearchPlan,
+  cleanSearchQuery,
   normalizeTavilyResults,
   shouldUseTavily
 } = require('../cloudfunctions/runAnalysis/tavilyClient.js')
@@ -17,7 +19,8 @@ test('requires Tavily API key before searching', () => {
 test('builds Tavily news search payload for recent evidence', () => {
   const payload = buildTavilyPayload({
     query: '某品牌争议',
-    timeRange: '近 7 天'
+    timeRange: '近 7 天',
+    topic: 'news'
   })
 
   assert.equal(payload.query, '某品牌争议')
@@ -25,6 +28,23 @@ test('builds Tavily news search payload for recent evidence', () => {
   assert.equal(payload.search_depth, 'basic')
   assert.equal(payload.time_range, 'week')
   assert.equal(payload.max_results, 8)
+})
+
+test('cleans long Chinese analysis prompt into searchable keywords', () => {
+  const query = cleanSearchQuery('分析一下清北鹅腿阿姨被揭发一直用鸭腿充数的时间')
+
+  assert.equal(query, '清北鹅腿阿姨 鸭腿充数')
+})
+
+test('builds news and general search plan with cleaned query fallback', () => {
+  const plan = buildSearchPlan({
+    query: '分析一下清北鹅腿阿姨被揭发一直用鸭腿充数的时间',
+    timeRange: '近 7 天'
+  })
+
+  assert.deepEqual(plan.map((item) => item.topic), ['news', 'general'])
+  assert.equal(plan[0].query, '清北鹅腿阿姨 鸭腿充数')
+  assert.equal(plan[1].query, '清北鹅腿阿姨 鸭腿充数')
 })
 
 test('normalizes Tavily results into compact source evidence', () => {
@@ -38,9 +58,9 @@ test('normalizes Tavily results into compact source evidence', () => {
         published_date: '2026-06-12'
       },
       {
-        title: '',
-        url: '',
-        content: ''
+        title: '官方回应某事件',
+        url: 'https://example.com/a',
+        content: '重复结果'
       }
     ]
   })
