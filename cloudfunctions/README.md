@@ -4,6 +4,8 @@
 
 `runAnalysis` 支持 OpenAI-compatible Chat Completions。配置 `AI_API_KEY` 和 `AI_MODEL` 后调用真实模型；未配置或调用失败时自动回退 mock 报告。
 
+可选配置 `TAVILY_API_KEY`。配置后会先调用 Tavily Search 获取最新公开来源，再把来源作为证据包交给 AI，降低模型凭空生成的风险。
+
 建议集合：
 
 - `users`

@@ -1,6 +1,7 @@
 const cloud = require('wx-server-sdk')
 const { buildReportDocument } = require('./reportTemplate')
 const { createAiReport, shouldUseAi } = require('./aiClient')
+const { searchSources, shouldUseTavily } = require('./tavilyClient')
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -18,6 +19,18 @@ exports.main = async (event) => {
   }
 
   let report
+  let sources = []
+  if (shouldUseTavily(process.env)) {
+    try {
+      sources = await searchSources({
+        query,
+        timeRange: event.timeRange
+      })
+    } catch (error) {
+      console.error('Tavily search failed, continuing without sources:', error)
+    }
+  }
+
   try {
     report = shouldUseAi(process.env)
       ? await createAiReport({
@@ -26,7 +39,8 @@ exports.main = async (event) => {
         openid: wxContext.OPENID,
         analysisType: event.analysisType,
         timeRange: event.timeRange,
-        sourceType: event.sourceType
+        sourceType: event.sourceType,
+        sources
       })
       : buildReportDocument({
         query,
@@ -36,6 +50,9 @@ exports.main = async (event) => {
         timeRange: event.timeRange,
         sourceType: event.sourceType
       })
+    if (!report.sources) {
+      report.sources = sources
+    }
   } catch (error) {
     console.error('AI analysis failed, falling back to mock report:', error)
     report = buildReportDocument({
@@ -47,6 +64,7 @@ exports.main = async (event) => {
       sourceType: event.sourceType
     })
     report.provider = 'mock_fallback'
+    report.sources = sources
   }
 
   const addResult = await db.collection('reports').add({ data: report })

@@ -8,6 +8,17 @@ function shouldUseAi(env) {
 }
 
 function buildChatCompletionPayload(options) {
+  const sources = Array.isArray(options.sources) ? options.sources : []
+  const evidenceText = sources.length
+    ? sources.map((source, index) => [
+      `来源${index + 1}: ${source.title}`,
+      `类型: ${source.sourceType || '公开来源'}`,
+      `发布时间: ${source.publishedAt || '未知'}`,
+      `链接: ${source.url}`,
+      `摘要: ${source.summary || '无摘要'}`
+    ].join('\n')).join('\n\n')
+    : '未提供外部检索材料。'
+
   return {
     model: options.model,
     temperature: 0.2,
@@ -21,7 +32,9 @@ function buildChatCompletionPayload(options) {
           '只返回 JSON，不要使用 Markdown，不要输出代码块。',
           'JSON 字段必须包含：summary, credibility, timeline, opinionGroups, sentimentTrend, controversyPoints, prediction, suggestions。',
           'credibility 必须包含 level, score, basis。level 使用“高”“中”“低”“待验证”之一，score 为 0-100 数字。',
-          'timeline, opinionGroups, controversyPoints, suggestions 都必须是字符串数组。'
+          'timeline, opinionGroups, controversyPoints, suggestions 都必须是字符串数组。',
+          '如果提供了外部检索材料，你只能基于材料分析，不得编造平台热度、评论数量、未给出的来源或不存在的事实。',
+          '如果材料不足，必须明确说明“暂无足够材料支持判断”。'
         ].join('')
       },
       {
@@ -30,6 +43,7 @@ function buildChatCompletionPayload(options) {
           `分析需求：${options.query}`,
           `分析类型：${options.analysisType || inferAnalysisType(options.query)}`,
           `时间范围：${options.timeRange || '近 7 天'}`,
+          `外部检索材料：\n${evidenceText}`,
           '请生成适合微信小程序展示的结构化舆情报告，重点包含信息可信度评估、不同观点阵营、趋势预测和行动建议。',
           '如果无法确认事实，请明确标注“待验证”，不要把热度当作事实。'
         ].join('\n')
@@ -45,7 +59,8 @@ async function createAiReport(options) {
     query: options.query,
     analysisType: options.analysisType,
     timeRange: options.timeRange,
-    model: env.AI_MODEL
+    model: env.AI_MODEL,
+    sources: options.sources
   })
   const response = await postJson(baseUrl, payload, env.AI_API_KEY)
   const text = response && response.choices && response.choices[0] && response.choices[0].message
@@ -59,6 +74,7 @@ async function createAiReport(options) {
     sourceType: options.sourceType,
     openid: options.openid,
     taskId: options.taskId,
+    sources: options.sources,
     aiText: text
   })
 }
@@ -99,6 +115,7 @@ function normalizeAiReport(options) {
     openid: options.openid || '',
     deleted: false,
     provider: 'ai',
+    sources: Array.isArray(options.sources) ? options.sources : [],
     createdAt: now,
     updatedAt: now
   }

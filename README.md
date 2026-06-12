@@ -52,5 +52,6 @@
 - `AI_API_KEY`：模型服务 API Key
 - `AI_MODEL`：模型名称，例如 `deepseek-chat`
 - `AI_BASE_URL`：接口地址，可选；不填时使用 `https://api.openai.com/v1/chat/completions`
+- `TAVILY_API_KEY`：Tavily Search API Key，可选；配置后 `runAnalysis` 会先联网检索最新公开资料，再让 AI 基于资料分析
 
 配置后重新部署 `runAnalysis` 云函数。真实 AI 不需要改小程序前端。
