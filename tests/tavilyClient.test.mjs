@@ -8,6 +8,7 @@ const {
   buildTavilyPayload,
   buildSearchPlan,
   cleanSearchQuery,
+  isRelevantSource,
   normalizeTavilyResults,
   shouldUseTavily
 } = require('../cloudfunctions/runAnalysis/tavilyClient.js')
@@ -83,4 +84,18 @@ test('normalizes Tavily results into compact source evidence', () => {
   assert.equal(sources[0].title, '官方回应某事件')
   assert.equal(sources[0].url, 'https://example.com/a')
   assert.equal(sources[0].sourceType, '官方/权威来源')
+})
+
+test('filters noisy Tavily results by keyword relevance', () => {
+  assert.equal(isRelevantSource({
+    title: '“鹅腿阿姨”本人回应：曾考虑说明情况',
+    summary: '清北学生关注鹅腿是否为鸭腿。',
+    url: 'https://example.com/a'
+  }, '清北鹅腿阿姨 鸭腿充数'), true)
+
+  assert.equal(isRelevantSource({
+    title: 'Famous dumpling spot axes signature dish',
+    summary: 'New York restaurant changes menu.',
+    url: 'https://example.com/b'
+  }, '清北鹅腿阿姨 鸭腿充数'), false)
 })

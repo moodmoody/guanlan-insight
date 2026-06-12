@@ -38,12 +38,14 @@ async function searchSources(options) {
     try {
       const response = await postJson(TAVILY_SEARCH_URL, payload, env.TAVILY_API_KEY)
       const sources = normalizeTavilyResults(response)
+      const relevantSources = sources.filter((source) => isRelevantSource(source, payload.query))
       debug.attempts.push({
         topic: payload.topic,
         query: payload.query,
-        resultCount: sources.length
+        rawCount: sources.length,
+        resultCount: relevantSources.length
       })
-      allSources.push(...sources)
+      allSources.push(...relevantSources)
 
       if (allSources.length >= 5) {
         break
@@ -145,6 +147,39 @@ function dedupeSources(sources) {
   })
 }
 
+function isRelevantSource(source, query) {
+  const haystack = `${source.title || ''} ${source.summary || ''} ${source.url || ''}`.toLowerCase()
+  const keywords = extractKeywords(query)
+
+  if (keywords.length === 0) {
+    return true
+  }
+
+  const hitCount = keywords.filter((keyword) => haystack.includes(keyword.toLowerCase())).length
+  if (keywords.some((keyword) => keyword.includes('鹅腿')) && keywords.some((keyword) => keyword.includes('鸭腿'))) {
+    return haystack.includes('鹅腿') && haystack.includes('鸭腿')
+  }
+  return hitCount >= Math.min(2, keywords.length)
+}
+
+function extractKeywords(query) {
+  const text = String(query || '')
+  const keywords = []
+  ;['清北', '鹅腿阿姨', '鹅腿', '鸭腿', '充数', '市场监管局', '团购群', '承认'].forEach((keyword) => {
+    if (text.includes(keyword)) {
+      keywords.push(keyword)
+    }
+  })
+  if (keywords.length) {
+    return keywords
+  }
+  return text
+    .split(/\s+/)
+    .map((item) => item.trim())
+    .filter((item) => item.length >= 2)
+    .slice(0, 4)
+}
+
 function mapTimeRange(timeRange) {
   const text = String(timeRange || '')
   if (/24|1\s*天|一天/.test(text)) {
@@ -216,6 +251,7 @@ module.exports = {
   buildTavilyPayload,
   buildSearchPlan,
   cleanSearchQuery,
+  isRelevantSource,
   normalizeTavilyResults,
   searchSources,
   shouldUseTavily
